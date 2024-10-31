@@ -14,4 +14,14 @@ const Roles = {
   ADMIN: "admin",
 };
 
-module.exports = { BloodGroup, Roles };
+const SoSStatus = {
+  ACTIVE: "active",
+  RESCUED: "rescued",
+};
+
+const VictimStatus = {
+  ALIVE: "alive",
+  DEAD: "dead",
+};
+
+module.exports = { BloodGroup, Roles, SoSStatus, VictimStatus };
