@@ -35,7 +35,7 @@ class SosRepository extends CrudResository {
       const data = { status: "rescued" };
       const response = await SoS.update(data, {
         where: {
-          id: id,
+          phone: id,
         },
       });
       return response;

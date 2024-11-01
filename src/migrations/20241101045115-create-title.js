@@ -1,36 +1,17 @@
 "use strict";
-
-const { Enums } = require("../utils/common");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Sos", {
+    await queryInterface.createTable("Titles", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      location: {
-        type: Sequelize.GEOMETRY("POINT"),
-        allowNull: false,
-      },
-      status: {
-        type: Sequelize.ENUM(
-          Enums.SoSStatus.ACTIVE,
-          Enums.SoSStatus.RESPONDED,
-          Enums.SoSStatus.RESCUED
-        ),
-        defaultValue: Enums.SoSStatus.ACTIVE,
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +24,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Sos");
+    await queryInterface.dropTable("Titles");
   },
 };

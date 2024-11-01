@@ -19,6 +19,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+
+      this.belongsTo(models.Title, {
+        foreignKey: "titleId",
+        targetKey: "id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   User.init(
@@ -55,6 +62,18 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.ENUM(Enums.Roles.ADMIN, Enums.Roles.VOLUNTER),
         defaultValue: Enums.Roles.VOLUNTER,
+      },
+      exp: {
+        type: DataTypes.INTEGER,
+        defaultValue: 100,
+      },
+      titleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Titles",
+          key: "id",
+        },
       },
     },
     {

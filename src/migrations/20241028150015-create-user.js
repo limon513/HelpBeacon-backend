@@ -45,6 +45,19 @@ module.exports = {
         type: Sequelize.ENUM(Enums.Roles.ADMIN, Enums.Roles.VOLUNTER),
         defaultValue: Enums.Roles.VOLUNTER,
       },
+      exp: {
+        type: Sequelize.INTEGER,
+        defaultValue: 100,
+      },
+      titleId: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+        references: {
+          model: "Titles",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

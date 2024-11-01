@@ -29,8 +29,11 @@ module.exports = {
         },
       },
       status: {
-        type: Sequelize.ENUM(Enums.VictimStatus.ALIVE, Enums.VictimStatus.DEAD),
-        defaultValue: Enums.VictimStatus.ALIVE,
+        type: Sequelize.ENUM(
+          Enums.RescueStatus.RESPONDED,
+          Enums.RescueStatus.RESCUED
+        ),
+        defaultValue: Enums.RescueStatus.RESPONDED,
       },
       createdAt: {
         allowNull: false,

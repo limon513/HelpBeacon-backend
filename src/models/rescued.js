@@ -45,8 +45,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       status: {
-        type: DataTypes.ENUM(Enums.VictimStatus.ALIVE, Enums.VictimStatus.DEAD),
-        defaultValue: Enums.VictimStatus.ALIVE,
+        type: DataTypes.ENUM(
+          Enums.RescueStatus.RESPONDED,
+          Enums.RescueStatus.RESCUED
+        ),
+        defaultValue: Enums.RescueStatus.RESPONDED,
       },
       createdAt: {
         allowNull: false,

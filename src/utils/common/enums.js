@@ -16,6 +16,12 @@ const Roles = {
 
 const SoSStatus = {
   ACTIVE: "active",
+  RESPONDED: "responded",
+  RESCUED: "rescued",
+};
+
+const RescueStatus = {
+  RESPONDED: "responded",
   RESCUED: "rescued",
 };
 
@@ -24,4 +30,4 @@ const VictimStatus = {
   DEAD: "dead",
 };
 
-module.exports = { BloodGroup, Roles, SoSStatus, VictimStatus };
+module.exports = { BloodGroup, Roles, SoSStatus, VictimStatus, RescueStatus };
