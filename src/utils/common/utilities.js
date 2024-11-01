@@ -14,8 +14,15 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 
+function isValidLocation({ latitude, longitude }) {
+  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180)
+    return false;
+  return true;
+}
+
 module.exports = {
   isValidPhone,
   isValidBloodGroup,
   isValidPassword,
+  isValidLocation,
 };
