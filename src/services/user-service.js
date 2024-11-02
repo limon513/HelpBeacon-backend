@@ -14,7 +14,10 @@ async function signUp(data) {
   } catch (error) {
     console.log(error);
     let explains = [];
-    if (error.name === "SequelizeUniqueConstraintError") {
+    if (
+      error.name === "SequelizeUniqueConstraintError" ||
+      error.name === "SequelizeConnectionError"
+    ) {
       explains.push(error.message);
       throw new AppError(explains, StatusCodes.BAD_REQUEST);
     }
@@ -43,6 +46,11 @@ async function logIn(data) {
     });
     return token;
   } catch (error) {
+    let explains = [];
+    if (error.name === "SequelizeConnectionError") {
+      explains.push(error.message);
+      throw new AppError(explains, StatusCodes.BAD_REQUEST);
+    }
     throw error;
   }
 }

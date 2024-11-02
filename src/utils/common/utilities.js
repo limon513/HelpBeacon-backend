@@ -15,7 +15,12 @@ function isValidPassword(password) {
 }
 
 function isValidLocation({ latitude, longitude }) {
-  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180)
+  if (
+    +latitude < -90 ||
+    +latitude > 90 ||
+    +longitude < -180 ||
+    +longitude > 180
+  )
     return false;
   return true;
 }

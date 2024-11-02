@@ -4,6 +4,13 @@ const AppError = require("../utils/common/appError");
 const { isValidLocation, isValidPhone } = require("../utils/common/utilities");
 
 function registerSos(req, res, next) {
+  if (!req.body.name) {
+    errorResponse.error = new AppError(
+      ["name required!"],
+      StatusCodes.BAD_REQUEST
+    );
+    return res.status(errorResponse.error.statusCode).json(errorResponse);
+  }
   if (!req.body.phone || !isValidPhone(req.body.phone)) {
     errorResponse.error = new AppError(
       ["phone not valid!"],
@@ -35,6 +42,18 @@ function registerSos(req, res, next) {
   next();
 }
 
+function getNewActiveSos(req, res, next) {
+  if (!req.params.id) {
+    errorResponse.error = new AppError(
+      ["no user found!"],
+      StatusCodes.BAD_REQUEST
+    );
+    return res.status(errorResponse.error.statusCode).json(errorResponse);
+  }
+  next();
+}
+
 module.exports = {
   registerSos,
+  getNewActiveSos,
 };

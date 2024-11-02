@@ -1,5 +1,7 @@
+const { response } = require("express");
 const { SoS, sequelize } = require("../models");
 const CrudResository = require("./crud-repo");
+const { getNewActiveSos } = require("./query-helpers");
 
 class SosRepository extends CrudResository {
   constructor() {
@@ -16,26 +18,23 @@ class SosRepository extends CrudResository {
     }
   }
 
+  async getNewActiveSos({ id, latitude, longitude }) {
+    try {
+      const [results, metadata] = await sequelize.query(getNewActiveSos, {
+        replacements: { longitude, latitude, id },
+      });
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getActiveSosByPhone(phone) {
     try {
       const response = await SoS.findOne({
         where: {
           phone: phone,
           status: "active",
-        },
-      });
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async updateSos(id) {
-    try {
-      const data = { status: "rescued" };
-      const response = await SoS.update(data, {
-        where: {
-          phone: id,
         },
       });
       return response;

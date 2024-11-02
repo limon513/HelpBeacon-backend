@@ -17,6 +17,7 @@ async function registerSos(req, res) {
     successResponse.data = response;
     return res.status(StatusCodes.OK).json(successResponse);
   } catch (error) {
+    console.log(error);
     if (error instanceof Error) errorResponse.error = error;
     else
       errorResponse.error = new AppError(
@@ -27,6 +28,19 @@ async function registerSos(req, res) {
   }
 }
 
+async function getNewActiveSos(req, res) {
+  try {
+    const response = await sosService.getNewActiveSos(req.params.id);
+    successResponse.data = response;
+    return res.status(StatusCodes.OK).json(successResponse);
+  } catch (error) {
+    console.log(error);
+    errorResponse.error = error;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse);
+  }
+}
+
 module.exports = {
   registerSos,
+  getNewActiveSos,
 };

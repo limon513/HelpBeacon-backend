@@ -17,6 +17,19 @@ class UserRepository extends CrudRepository {
     }
   }
 
+  async getUserById(id) {
+    try {
+      const response = await User.findOne({
+        where: {
+          id: id,
+        },
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async logIn(data) {
     try {
       const response = await User.findOne({

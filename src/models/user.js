@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       titleId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        defaultValue: 1,
         references: {
           model: "Titles",
           key: "id",

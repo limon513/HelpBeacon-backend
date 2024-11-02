@@ -52,7 +52,6 @@ module.exports = {
       titleId: {
         type: Sequelize.INTEGER,
         defaultValue: 1,
-        allowNull: false,
         references: {
           model: "Titles",
           key: "id",
