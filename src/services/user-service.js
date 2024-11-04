@@ -12,13 +12,13 @@ async function signUp(data) {
     const response = await UserRepo.signUp(data);
     return response;
   } catch (error) {
-    console.log(error);
+    console.log("error is:", error);
     let explains = [];
     if (
       error.name === "SequelizeUniqueConstraintError" ||
       error.name === "SequelizeConnectionError"
     ) {
-      explains.push(error.message);
+      explains.push(error.errors[0].message);
       throw new AppError(explains, StatusCodes.BAD_REQUEST);
     }
     throw error;
@@ -35,6 +35,7 @@ async function logIn(data) {
     if (!passwordMatched)
       throw new AppError(["wrong password!"], StatusCodes.BAD_REQUEST);
     const payload = {
+      userId: response.id,
       userName: response.userName,
       phone: response.phone,
       bloodGroup: response.bloodGroup,
