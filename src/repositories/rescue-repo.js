@@ -1,7 +1,8 @@
 const CrudRepository = require("./crud-repo");
-const { Rescude } = require("../models");
+const { Rescude, sequelize } = require("../models");
 const AppError = require("../utils/common/appError");
 const { StatusCodes } = require("http-status-codes");
+const { getRespondedSos } = require("./query-helpers");
 
 class RescueRepository extends CrudRepository {
   constructor() {
@@ -37,6 +38,17 @@ class RescueRepository extends CrudRepository {
       });
       console.log(respose.length);
       return respose.length;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllResponded({ id, latitude, longitude }) {
+    try {
+      const [result, metadata] = await sequelize.query(getRespondedSos, {
+        replacements: { longitude, latitude, id },
+      });
+      return result;
     } catch (error) {
       throw error;
     }

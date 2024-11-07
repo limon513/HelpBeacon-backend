@@ -12,6 +12,17 @@ async function addResponse(data) {
   }
 }
 
+async function getAllResponded(data) {
+  try {
+    const response = await RescueRepo.getAllResponded(data);
+    console.log(response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   addResponse,
+  getAllResponded,
 };

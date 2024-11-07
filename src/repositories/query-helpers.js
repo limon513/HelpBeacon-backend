@@ -5,4 +5,10 @@ const getNewActiveSos = `
     order by distance asc;
 `;
 
-module.exports = { getNewActiveSos };
+const getRespondedSos = `select Sos.id, Sos.name, Sos.phone, Sos.location, Sos.status, a.respondAt, ST_Distance_Sphere(POINT (:longitude,:latitude),POINT(ST_Y(Sos.location),ST_X(Sos.location))) as distance
+    from 
+    (select sosId, createdAt as respondAt from Rescudes where userId = :id) as a
+    left join Sos
+    on a.sosId = Sos.id;`;
+
+module.exports = { getNewActiveSos, getRespondedSos };
