@@ -9,6 +9,8 @@ const getRespondedSos = `select Sos.id, Sos.name, Sos.phone, Sos.location, Sos.s
     from 
     (select sosId, createdAt as respondAt from Rescudes where userId = :id) as a
     left join Sos
-    on a.sosId = Sos.id;`;
+    on a.sosId = Sos.id
+    order by respondAt asc
+    ;`;
 
 module.exports = { getNewActiveSos, getRespondedSos };
